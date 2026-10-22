@@ -5,7 +5,7 @@ CMM-SCREEN：社区居民三高共病风险预测网页工具
 运行前安装：
     python -m pip install streamlit pandas numpy xgboost scikit-learn imbalanced-learn openpyxl
 
-请把 cmm_xgboost_bundle.pkl 放在 model/ 文件夹，然后运行：
+请把 cmm_xgboost_bundle.pkl 放在 app.py 同一目录，然后运行：
     python -m streamlit run app.py
 
 模型结局方向：
@@ -31,8 +31,7 @@ import streamlit as st
 # =============================================================================
 APP_DIR = Path(__file__).resolve().parent
 BUNDLE_FILENAME = "cmm_xgboost_bundle.pkl"
-MODEL_DIR = APP_DIR / "model"
-BUNDLE_PATH = MODEL_DIR / BUNDLE_FILENAME
+BUNDLE_PATH = APP_DIR / BUNDLE_FILENAME
 
 # 批量预测结果展示列
 BATCH_RESULT_DISPLAY_COLUMNS = [
@@ -882,7 +881,7 @@ render_header()
 
 if not BUNDLE_PATH.is_file():
     st.error(f"尚未找到模型包：{BUNDLE_PATH}")
-    st.write("请先运行 train_model.py 训练模型，确保 model/cmm_xgboost_bundle.pkl 存在。")
+    st.write("请先运行 train_model.py 训练模型，确保 cmm_xgboost_bundle.pkl 存在。")
     render_footer()
 else:
     try:
